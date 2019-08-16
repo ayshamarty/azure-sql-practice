@@ -40,13 +40,6 @@ public class PetRepository {
 		return jdbcTemplate.query(SQL_FIND_ALL, ROW_MAPPER);
 	}
 
-	public int save(Pet pet) {
-		final SqlParameterSource paramSource = new MapSqlParameterSource().addValue("name", pet.getName())
-				.addValue("species", pet.getSpecies());
-
-		return jdbcTemplate.update(SQL_INSERT, paramSource);
-	}
-
 	public void deleteById(Integer id) {
 		final SqlParameterSource paramSource = new MapSqlParameterSource("id", id);
 		jdbcTemplate.update(SQL_DELETE_BY_ID, paramSource);

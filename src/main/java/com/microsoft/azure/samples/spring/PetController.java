@@ -6,38 +6,35 @@
 
 package com.microsoft.azure.samples.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path="/pets")
+@RequestMapping(path = "/pets")
 public class PetController {
-    @Autowired
-    private PetRepository petRepository;
+	@Autowired
+	private PetRepository petRepository;
 
-    @PostMapping
-    public @ResponseBody String createPet(@RequestBody Pet pet) {
-        petRepository.save(pet);
-        return String.format("Added %s", pet);
-    }
+	@GetMapping
+	public @ResponseBody Iterable<Pet> getAllPets() {
+		return petRepository.findAll();
+	}
 
-    @GetMapping
-    public @ResponseBody Iterable<Pet> getAllPets() {
-        return petRepository.findAll();
-    }
+	@GetMapping("/{id}")
+	public @ResponseBody Optional<Pet> getPet(@PathVariable Integer id) {
+		return Optional.ofNullable(petRepository.findById(id));
+	}
 
-    @GetMapping("/{id}")
-    public @ResponseBody Optional<Pet> getPet(@PathVariable Integer id) {
-        return Optional.ofNullable(petRepository.findById(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public @ResponseBody String deletePet(@PathVariable Integer id) {
-        petRepository.deleteById(id);
-        return "Deleted " + id;
-    }
+	@DeleteMapping("/{id}")
+	public @ResponseBody String deletePet(@PathVariable Integer id) {
+		petRepository.deleteById(id);
+		return "Deleted " + id;
+	}
 }

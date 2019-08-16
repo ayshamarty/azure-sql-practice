@@ -9,43 +9,18 @@ package com.microsoft.azure.samples.spring;
 import org.springframework.data.annotation.Id;
 
 public class Pet {
-    @Id
-    private Integer id;
+	@Id
+	private Integer anprId;
 
-    private String name;
+	private String streetName;
 
-    private String species;
+	private String latitude;
 
-    public Integer getId() {
-        return id;
-    }
+	private String longitude;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", species='" + species + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Pet{" + "id=" + anprId + ", stree='" + streetName + '\'' + ", latitude='" + latitude + '\''
+				+ ", longitude='" + longitude + '\'' + '}';
+	}
 }
